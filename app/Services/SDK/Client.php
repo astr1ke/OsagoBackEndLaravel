@@ -5,8 +5,6 @@ namespace App\Services\SDK;
 
 class Client
 {
-    private $clientId;
-
     private $phoneNumber;
 
     private $comment;
@@ -20,18 +18,10 @@ class Client
      * @param $comment
      * @param $files
      */
-    public function __construct($clientId, $phoneNumber, $comment, $files){
-        $this->clientId = $clientId;
+    public function __construct($phoneNumber, $comment, $files) {
         $this->phoneNumber = $phoneNumber;
         $this->comment = $comment;
         $this->files = $files;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getClientId() {
-        return $this->clientId;
     }
 
     /**

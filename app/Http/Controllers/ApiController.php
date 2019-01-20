@@ -4,8 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Services\ClientService;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
-class ApiClientController extends Controller
+class ApiController extends Controller
 {
     /**
      * @param Request $request

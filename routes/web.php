@@ -14,3 +14,8 @@
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('/d', function () {
+    return view('download');
+});
+Route::post('/post', "DownloadController@post");

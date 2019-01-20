@@ -37,7 +37,7 @@ class ClientService
     public function sendMailToAdmin() {
         $filesDir = $this->_client->getPhoneNumber();
         $comment = $this->_client->getComment();
-        $sendDir = Storage::disk('local')->files('скрины/'.$filesDir);
+        $sendDir = Storage::disk('local')->files('ВходящиеСканы/'.$filesDir);
 
         $attach = new mailToAdmin();
         $attach->attach = $sendDir;

@@ -4,7 +4,6 @@ namespace App\Services\SDK;
 
 use App\Services\SDK;
 use Illuminate\Support\Facades\Storage;
-use Intervention\Image\ImageManagerStatic as Image;
 
 class _utils
 {
@@ -13,38 +12,43 @@ class _utils
      * @return Client
      */
     public function getDataFromRequest($request) {
-        $clientId = rand(100,999);
         $clientNumber = $request->number;
         $comment = $request->comment;
-        $files = $request->file('uploadFiles');
-        $client = new SDK\Client($clientId, $clientNumber, $comment, $files);
+
+        $allFile = array();
+        $allFile['passport_1_'] = $request->hiddenField1;
+        $allFile['passport_2_'] = $request->hiddenField2;
+        $allFile['sts_1_']      = $request->hiddenField3;
+        $allFile['sts_2_']      = $request->hiddenField4;
+        $allFile['pts_1_']      = $request->hiddenField5;
+        $allFile['pts_2_']      = $request->hiddenField6;
+        $allFile['dkp_']        = $request->hiddenField7;
+        $allFile['prava_1_1_']  = $request->hiddenField10;
+        $allFile['prava_1_2_']  = $request->hiddenField101;
+        $allFile['prava_2_1_']  = $request->hiddenField20;
+        $allFile['prava_2_2_']  = $request->hiddenField201;
+        $allFile['prava_3_1_']  = $request->hiddenField30;
+        $allFile['prava_3_2_']  = $request->hiddenField301;
+        $allFile['prava_4_1_']  = $request->hiddenField40;
+        $allFile['prava_4_2_']  = $request->hiddenField401;
+
+        $client = new SDK\Client($clientNumber, $comment, $allFile);
         return $client;
     }
 
     public function saveFileToDisk($files, $dir) {
-        $dirPath = 'скрины/' . $dir;
-        Storage::disk('local')->makeDirectory($dirPath);
-        foreach ($files as $file) {
-            Storage::disk('local')->putFile($dirPath, $file);
-        }
 
-        try{
-            $this->_resizeFile($dirPath);
-        }catch (Exception $e) {
-            echo 'Ошибка со сменой размера файла: ',  $e->getMessage(), "\n";
-        }
+        foreach ($files as $item => $value) {
+            $img = $value;
+            $img = str_replace('data:image/jpeg;base64,', '', $img);
+            $img = str_replace(' ', '+', $img);
+            $img = base64_decode($img);
+            $fileName = $item . time() . '.jpg';
+            $fileDir = 'ВходящиеСканы/' . $dir;
 
-
-    }
-
-    private function _resizeFile($dirPath) {
-        $savedFiles = Storage::disk('local')->files($dirPath);
-        foreach ($savedFiles as $file){
-            $tempImage = Image::make('../storage/app/'.$file);
-            $tempImage->resize(800, 800);
-            $ext = substr(strrchr($file,'.'),1);
-            $pathToFile = strrchr($file,'/');
-            Storage::disk('local')->put($dirPath . $pathToFile, $tempImage->encode($ext, 80));
+            if ($img != "") {
+                Storage::disk('local')->put($fileDir . '/' . $fileName, $img);
+            }
         }
     }
 }
