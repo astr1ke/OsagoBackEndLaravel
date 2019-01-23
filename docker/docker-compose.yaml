@@ -1,13 +1,14 @@
 version: '3'
+
 services:
 
     #PHP Service
-    app:
+    php-fpm:
         build:
-            context: .
-            dockerfile: Dockerfile
-        image: digitalocean.com/php
-        container_name: app
+            context: docker/php-fpm
+        volumes:
+            - ./:/var/www
+        container_name: php-fpm
         restart: unless-stopped
         tty: true
         environment:
@@ -15,25 +16,20 @@ services:
             PHP_IDE_CONFIG: "serverName=Docker"
             SERVICE_NAME: app
             SERVICE_TAGS: dev
-        working_dir: /var/www
-        volumes:
-            - ./:/var/www
-            - ./DockerConf/php/local.ini:/usr/local/etc/php/conf.d/local.ini
         networks:
             - app-network
 
     #Nginx Service
     webserver:
-        image: nginx:alpine
+        build:
+            context: docker/nginx
+        volumes:
+            - ./:/var/www
+        ports:
+            - "80:80"
         container_name: webserver
         restart: unless-stopped
         tty: true
-        ports:
-            - "80:80"
-            - "443:443"
-        volumes:
-            - ./:/var/www
-            - ./DockerConf/nginx/conf.d/:/etc/nginx/conf.d/
         networks:
             - app-network
 
@@ -55,11 +51,16 @@ services:
         networks:
             - app-network
 
+    #Adminer
+    adminer:
+        image: adminer
+        restart: always
+        ports:
+            - "9090:8080"
+        networks:
+            - app-network
+
 #Docker Networks
 networks:
     app-network:
         driver: bridge
-#Volumes
-volumes:
-    dbdata:
-        driver: local
