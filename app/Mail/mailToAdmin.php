@@ -23,7 +23,7 @@ class mailToAdmin extends Mailable
     public function build()
     {
         foreach ($this->attach as $at){
-            $this->attach('../storage/app/'.$at);
+            $this->attach('../storage/app/public/'.$at);
         }
         return $this->view('mail')->with($this->number)->with($this->comment);
     }

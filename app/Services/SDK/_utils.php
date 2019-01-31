@@ -44,10 +44,10 @@ class _utils
             $img = str_replace(' ', '+', $img);
             $img = base64_decode($img);
             $fileName = $item . time() . '.jpg';
-            $fileDir = 'ВходящиеСканы/' . $dir;
+            $fileDir = 'inputScans/' . $dir;
 
             if ($img != "") {
-                Storage::disk('local')->put($fileDir . '/' . $fileName, $img);
+                Storage::disk('public')->put($fileDir . '/' . $fileName, $img);
             }
         }
     }

@@ -5,7 +5,7 @@ services:
     #PHP Service
     php-fpm:
         build:
-            context: docker/php-fpm
+            context: php-fpm
         volumes:
             - ./:/var/www
         container_name: php-fpm
@@ -22,7 +22,7 @@ services:
     #Nginx Service
     webserver:
         build:
-            context: docker/nginx
+            context: nginx
         volumes:
             - ./:/var/www
         ports:

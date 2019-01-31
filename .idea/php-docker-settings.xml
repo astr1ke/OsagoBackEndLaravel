@@ -3,7 +3,7 @@
   <component name="PhpDockerContainerSettings">
     <list>
       <map>
-        <entry key="4c7422f4-1fef-433e-9fd9-2c93eb4bd93c">
+        <entry key="0436a0e2-c5e2-4a54-bd2e-2b18a203220c">
           <value>
             <DockerContainerSettings>
               <option name="version" value="1" />
@@ -11,51 +11,6 @@
                 <list>
                   <DockerVolumeBindingImpl>
                     <option name="containerPath" value="/opt/project" />
-                    <option name="hostPath" value="$PROJECT_DIR$" />
-                  </DockerVolumeBindingImpl>
-                </list>
-              </option>
-            </DockerContainerSettings>
-          </value>
-        </entry>
-        <entry key="c222f57e-bb8d-46fe-9d6c-cf85512c5fe5">
-          <value>
-            <DockerContainerSettings>
-              <option name="version" value="1" />
-              <option name="volumeBindings">
-                <list>
-                  <DockerVolumeBindingImpl>
-                    <option name="containerPath" value="/var/www" />
-                    <option name="hostPath" value="$PROJECT_DIR$" />
-                  </DockerVolumeBindingImpl>
-                </list>
-              </option>
-            </DockerContainerSettings>
-          </value>
-        </entry>
-        <entry key="d7bae055-1f42-4801-b1ce-3682e3901a01">
-          <value>
-            <DockerContainerSettings>
-              <option name="version" value="1" />
-              <option name="volumeBindings">
-                <list>
-                  <DockerVolumeBindingImpl>
-                    <option name="containerPath" value="/opt/project" />
-                    <option name="hostPath" value="$PROJECT_DIR$" />
-                  </DockerVolumeBindingImpl>
-                </list>
-              </option>
-            </DockerContainerSettings>
-          </value>
-        </entry>
-        <entry key="d7ca820f-fb3b-4e3c-84f5-4540b8a9ea10">
-          <value>
-            <DockerContainerSettings>
-              <option name="version" value="1" />
-              <option name="volumeBindings">
-                <list>
-                  <DockerVolumeBindingImpl>
-                    <option name="containerPath" value="/var/www" />
                     <option name="hostPath" value="$PROJECT_DIR$" />
                   </DockerVolumeBindingImpl>
                 </list>
