@@ -7,7 +7,7 @@
             <a href="/admin/addNews"><i class="icon-chevron-right"></i>Добавить новость</a>
         </li>
         <li>
-            <a href="#"><span class="badge badge-success pull-right">731</span> Заявки</a>
+            <a href="/admin/zayavki"><span class="badge badge-success pull-right">{{$countZayavki}}</span> Заявки</a>
         </li>
         <li>
             <a href="/admin/news"><span class="badge badge-info pull-right">{{$countNews}}</span> Новостей</a>

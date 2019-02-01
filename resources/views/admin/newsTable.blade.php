@@ -11,9 +11,6 @@
                 <div class="block-content collapse in">
                     <div class="span12">
                         <div class="table-toolbar">
-                            <div class="btn-group">
-                                <a href="/admin/addNews"><button class="btn btn-success">Добавить статью <i class="icon-plus icon-white"></i></button></a>
-                            </div>
                             <div class="btn-group pull-right">
                                 <button data-toggle="dropdown" class="btn dropdown-toggle">Tools <span class="caret"></span></button>
                                 <ul class="dropdown-menu">

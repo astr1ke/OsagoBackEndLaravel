@@ -15,6 +15,7 @@ class ApiController extends Controller
     public function addClient(Request $request) {
         $clientsService = new ClientService($request);
         $clientsService->saveFileToServer();
+        $clientsService->saveRequestToBase($request);
         $clientsService->sendMailToAdmin();
 
         return json_encode(['done' => 'true']);

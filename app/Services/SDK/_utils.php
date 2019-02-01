@@ -44,6 +44,7 @@ class _utils
             $img = str_replace(' ', '+', $img);
             $img = base64_decode($img);
             $fileName = $item . time() . '.jpg';
+            $dir = preg_replace("/[^0-9]/", '', $dir);
             $fileDir = 'inputScans/' . $dir;
 
             if ($img != "") {

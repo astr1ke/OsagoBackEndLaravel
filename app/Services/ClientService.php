@@ -3,6 +3,8 @@
 namespace App\Services;
 
 use App\Services\SDK;
+use App\Zayavka;
+use http\Env\Request;
 use Illuminate\Support\Facades\Storage;
 use App\Mail\mailToAdmin;
 use Illuminate\Support\Facades\Mail;
@@ -35,7 +37,7 @@ class ClientService
      * Sending Mail with Data to Admin
      */
     public function sendMailToAdmin() {
-        $filesDir = $this->_client->getPhoneNumber();
+        $filesDir = preg_replace("/[^0-9]/", '', $this->_client->getPhoneNumber());
         $comment = $this->_client->getComment();
         $sendDir = Storage::disk('public')->files('inputScans/'.$filesDir);
 
@@ -51,5 +53,15 @@ class ClientService
      */
     public function getClientData() {
         return $this->_client;
+    }
+
+    /**
+     * @param $request \Illuminate\Http\Request
+     */
+    public function saveRequestToBase($request) {
+        Zayavka::create([
+            'number' => $request->number,
+            'comment' => $request->comment,
+        ]);
     }
 }

@@ -30,26 +30,26 @@
             </div>
             <div class="block-content collapse in">
                 <div class="span3">
-                    <div class="chart" data-percent="73">73%</div>
-                    <div class="chart-bottom-heading"><span class="label label-info">Visitors</span>
+                    <div class="chart" data-percent="73">{{$countZayavkiToday}}</div>
+                    <div class="chart-bottom-heading"><span class="label label-info">Заявок за сегодня</span>
 
                     </div>
                 </div>
                 <div class="span3">
-                    <div class="chart" data-percent="53">53%</div>
-                    <div class="chart-bottom-heading"><span class="label label-info">Page Views</span>
+                    <div class="chart" data-percent="53">{{$countZayavki}}</div>
+                    <div class="chart-bottom-heading"><span class="label label-info">Всего заявок</span>
 
                     </div>
                 </div>
                 <div class="span3">
-                    <div class="chart" data-percent="83">83%</div>
-                    <div class="chart-bottom-heading"><span class="label label-info">Users</span>
+                    <div class="chart" data-percent="83">{{$countNews}}</div>
+                    <div class="chart-bottom-heading"><span class="label label-info">Всего новостей</span>
 
                     </div>
                 </div>
                 <div class="span3">
-                    <div class="chart" data-percent="13">13%</div>
-                    <div class="chart-bottom-heading"><span class="label label-info">Orders</span>
+                    <div class="chart" data-percent="13">{{$countFiles-1}}</div>
+                    <div class="chart-bottom-heading"><span class="label label-info">Файлов на сервере</span>
 
                     </div>
                 </div>
@@ -62,8 +62,8 @@
             <!-- block -->
             <div class="block">
                 <div class="navbar navbar-inner block-header">
-                    <div class="muted pull-left">Users</div>
-                    <div class="pull-right"><span class="badge badge-info">1,234</span>
+                    <div class="muted pull-left">Последние новости</div>
+                    <div class="pull-right"><span class="badge badge-info">{{$countNews}}</span>
 
                     </div>
                 </div>
@@ -71,31 +71,24 @@
                     <table class="table table-striped">
                         <thead>
                         <tr>
-                            <th>#</th>
-                            <th>First Name</th>
-                            <th>Last Name</th>
-                            <th>Username</th>
+                            <th>№</th>
+                            <th>Заголовок</th>
+                            <th>Текст</th>
+                            <th>Дата создания</th>
                         </tr>
                         </thead>
                         <tbody>
-                        <tr>
-                            <td>1</td>
-                            <td>Mark</td>
-                            <td>Otto</td>
-                            <td>@mdo</td>
-                        </tr>
-                        <tr>
-                            <td>2</td>
-                            <td>Jacob</td>
-                            <td>Thornton</td>
-                            <td>@fat</td>
-                        </tr>
-                        <tr>
-                            <td>3</td>
-                            <td>Vincent</td>
-                            <td>Gabriel</td>
-                            <td>@gabrielva</td>
-                        </tr>
+                        <?php $i = 0; ?>
+                        @foreach($articles as $article)
+                            <?php $i++;
+                            if ($i > 3) break; ?>
+                            <tr>
+                                <td>{{$i}}</td>
+                                <td><a href="/admin/news/{{$article->id}}">{{$article->title}}</a></td>
+                                <td>{{substr(strip_tags($article->text), 0, 25)}}</td>
+                                <td>{{$article->created_at}}</td>
+                            </tr>
+                        @endforeach
                         </tbody>
                     </table>
                 </div>
@@ -106,8 +99,8 @@
             <!-- block -->
             <div class="block">
                 <div class="navbar navbar-inner block-header">
-                    <div class="muted pull-left">Orders</div>
-                    <div class="pull-right"><span class="badge badge-info">752</span>
+                    <div class="muted pull-left">Последние заявки</div>
+                    <div class="pull-right"><span class="badge badge-info">{{$countZayavki}}</span>
 
                     </div>
                 </div>
@@ -115,31 +108,24 @@
                     <table class="table table-striped">
                         <thead>
                         <tr>
-                            <th>#</th>
-                            <th>Product</th>
-                            <th>Date</th>
-                            <th>Amount</th>
+                            <th>№</th>
+                            <th>Номер телефона</th>
+                            <th>Комментарий пользователя</th>
+                            <th>Дата создания</th>
                         </tr>
                         </thead>
                         <tbody>
-                        <tr>
-                            <td>1</td>
-                            <td>Coat</td>
-                            <td>02/02/2013</td>
-                            <td>$25.12</td>
-                        </tr>
-                        <tr>
-                            <td>2</td>
-                            <td>Jacket</td>
-                            <td>01/02/2013</td>
-                            <td>$335.00</td>
-                        </tr>
-                        <tr>
-                            <td>3</td>
-                            <td>Shoes</td>
-                            <td>01/02/2013</td>
-                            <td>$29.99</td>
-                        </tr>
+                        <?php $i = 0; ?>
+                        @foreach($zayavki as $zayavka)
+                            <?php $i++;
+                            if ($i > 3) break; ?>
+                            <tr>
+                                <td>{{$i}}</td>
+                                <td><a href="/admin/zayavki/{{$zayavka->id}}">{{$zayavka->number}}</a></td>
+                                <td>{{substr($zayavka->comment, 0, 44)}}</td>
+                                <td>{{$zayavka->created_at}}</td>
+                            </tr>
+                        @endforeach
                         </tbody>
                     </table>
                 </div>
@@ -151,20 +137,25 @@
         <!-- block -->
         <div class="block">
             <div class="navbar navbar-inner block-header">
-                <div class="muted pull-left">Gallery</div>
-                <div class="pull-right"><span class="badge badge-info">1,462</span>
+                <div class="muted pull-left">Загруженые скрины</div>
+                <div class="pull-right"><span class="badge badge-info">{{count($gallery)}}</span>
 
                 </div>
             </div>
             <div class="block-content collapse in">
                 <div class="row-fluid padd-bottom">
+                    <?php $i = 0 ?>
                     @foreach($gallery as $image)
-                        @if($image != "ВходящиеСканы/.DS_Store")
-                            <div class="span3">
-                                <a href="#" class="thumbnail">
-                                    <img src="storage/{{$image}}" alt="" style="width: 260px; height: 180px; object-fit: cover;" >
-                                </a>
-                            </div>
+                        @if($image != "inputScans/.DS_Store")
+                            <?php $i++ ?>
+                            @if($i == 1 || ($i % 4) == 1) <div class="row-fluid padd-bottom"> @endif
+
+                                <div class="span3">
+                                    <a href="{{asset('')}}storage/{{$image}}" class="thumbnail">
+                                        <img src="{{asset('')}}storage/{{$image}}" alt="" style="width: 260px; height: 180px; object-fit: cover;" data-jslghtbx>
+                                    </a>
+                                </div>
+                                @if(($i % 4) == 0)</div>@endif
                         @endif
                     @endforeach
                 </div>
@@ -185,6 +176,8 @@
     <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
     <script src="{{asset('')}}vendors/modernizr-2.6.2-respond-1.1.0.min.js"></script>
+
+    <link rel="stylesheet" href="{{asset('')}}css/lightbox.css">
 @endsection
 
 @section('js')
@@ -199,5 +192,9 @@
             $('.chart').easyPieChart({animate: 1000});
         });
     </script>
-
+    <script src="{{asset('')}}js/lightbox.js" type="text/javascript"></script>
+    <script>
+        var lightbox = new Lightbox();
+        lightbox.load();
+    </script>
 @endsection
