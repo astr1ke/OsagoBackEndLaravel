@@ -5,7 +5,7 @@
         <div class="row-fluid">
             <div class="span12" id="content">
 
-                <form action="/saveNews" method="post" enctype="multipart/form-data">
+                <form action="{{asset('')}}admin/saveNews" method="post" enctype="multipart/form-data">
                         {{csrf_field()}}
                     <div>
                         <h2>Редактор статьи</h2>
